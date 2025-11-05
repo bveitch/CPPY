@@ -1,0 +1,12 @@
+name: pybind11_exercises
+channels:
+  - default
+dependencies:
+  - pytest
+  - python>=3.13.*
+  - numpy=2.2.*
+  - pip=24.2
+  - pylops
+  - pip:
+    - -e ./cpp_modules/big_factorial_cpp
+    - -e ./cpp_modules/matrix_operator
