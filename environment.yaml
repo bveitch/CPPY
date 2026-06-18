@@ -1,4 +1,4 @@
-name: pybind11_exercises
+name: cppy
 channels:
   - default
 dependencies:
@@ -9,4 +9,3 @@ dependencies:
   - pylops
   - pip:
     - -e ./cpp_modules/big_factorial_cpp
-    - -e ./cpp_modules/matrix_operator
