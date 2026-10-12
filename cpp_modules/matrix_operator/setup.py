@@ -1,3 +1,8 @@
+# Force GCC/G++ before importing setuptools
+import os
+import sys
+os.environ["CC"] = "/opt/homebrew/bin/gcc-15"
+os.environ["CXX"] = "/opt/homebrew/bin/g++-15"
 from setuptools import setup
 from pybind11.setup_helpers import Pybind11Extension
 

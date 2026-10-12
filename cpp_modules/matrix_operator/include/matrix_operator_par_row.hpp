@@ -19,7 +19,7 @@ public:
     MatrixOperator<T>(matrix, nthreads){};
 
     void fwd_add(const T* const input, T* const output) const final {
-        #pragma omp parallel for default(none)
+        #pragma omp parallel for
         for (int irow=0; irow<m_nrow; irow++){
             const T* row_data = m_data[irow];
             for (int icol=0; icol < m_ncol; ++icol) {
@@ -31,7 +31,7 @@ public:
    void adj_add(const T* const inputT, T* const outputT) const final { 
         for (int icol=0; icol<m_ncol; icol++){
             const T* col_data = m_dataT[icol];
-            #pragma omp parallel for default(none) shared (icol, col_data) reduction(+ : outputT[icol])
+            #pragma omp parallel for shared (icol, col_data) reduction(+ : outputT[icol])
             for (int irow=0; irow < m_nrow; ++irow) {
                 outputT[icol]+=col_data[irow]*inputT[irow];
             }
