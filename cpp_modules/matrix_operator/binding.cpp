@@ -20,35 +20,27 @@ PYBIND11_MODULE(matrix_operator_cpp, m) {
            Matrix to Vec Linear Operators
 
     )pbdoc";
-    py::class_<BaseOperator<double>>(m, "BaseOp");
+    py::class_<BaseOperator<double>>(m, "BaseOp")
+    .def_property_readonly("shape", &MatrixOperator<double>::shape)
+    .def_property_readonly("nthreads", &MatrixOperator<double>::get_num_threads);
     py::class_<MatrixOperator<double>, BaseOperator<double>>(m, "MatrixOp")
     .def(py::init<const py::array_t<double, py::array::c_style | py::array::forcecast>&, const int&>())
     .def("forward", &MatrixOperator<double>::forward)
-    .def("adjoint", &MatrixOperator<double>::adjoint)
-    .def_property_readonly("shape", &MatrixOperator<double>::shape)
-    .def_property_readonly("nthreads", &MatrixOperator<double>::get_num_threads);
+    .def("adjoint", &MatrixOperator<double>::adjoint);
     py::class_<MatrixOperatorParRow<double>, MatrixOperator<double>>(m, "MatrixOpParRow")
     .def(py::init<const py::array_t<double, py::array::c_style | py::array::forcecast>&, const int&>())
     .def("forward", &MatrixOperator<double>::forward)
-    .def("adjoint", &MatrixOperator<double>::adjoint)
-    .def_property_readonly("shape", &MatrixOperator<double>::shape)
-    .def_property_readonly("nthreads", &MatrixOperator<double>::get_num_threads);
+    .def("adjoint", &MatrixOperator<double>::adjoint);
     py::class_<MatrixOperatorParCol<double>, MatrixOperator<double>>(m, "MatrixOpParCol")
     .def(py::init<const py::array_t<double, py::array::c_style | py::array::forcecast>&, const int&>())
     .def("forward", &MatrixOperator<double>::forward)
-    .def("adjoint", &MatrixOperator<double>::adjoint)
-    .def_property_readonly("shape", &MatrixOperator<double>::shape)
-    .def_property_readonly("nthreads", &MatrixOperator<double>::get_num_threads);
+    .def("adjoint", &MatrixOperator<double>::adjoint);
     py::class_<MatrixOperatorParBlock<double>, MatrixOperator<double>>(m, "MatrixOpParBlk")
     .def(py::init<const py::array_t<double, py::array::c_style | py::array::forcecast>&, const int&>())
     .def("forward", &MatrixOperator<double>::forward)
-    .def("adjoint", &MatrixOperator<double>::adjoint)
-    .def_property_readonly("shape", &MatrixOperator<double>::shape)
-    .def_property_readonly("nthreads", &MatrixOperator<double>::get_num_threads);
+    .def("adjoint", &MatrixOperator<double>::adjoint);
     py::class_<SparseOperator<double>, BaseOperator<double>>(m, "SparseOp")
     .def(py::init<const int&, const int&, const py::tuple&, const py::tuple&,const py::tuple&, const int&>())
     .def("forward", &SparseOperator<double>::forward)
-    .def("adjoint", &SparseOperator<double>::adjoint)
-    .def_property_readonly("shape", &SparseOperator<double>::shape)
-    .def_property_readonly("nthreads", &MatrixOperator<double>::get_num_threads);
+    .def("adjoint", &SparseOperator<double>::adjoint);
 }
