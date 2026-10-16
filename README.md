@@ -55,7 +55,6 @@ python test_pylops_binding.py
 ```
  
 ## ToDo
- - Fix ```clang``` issues!
  - Deprecate setup.py. Note this means moving to ```scikit-build-core```
 
 
