@@ -8,4 +8,4 @@ dependencies:
   - pip=24.2
   - pylops
   - pip:
-    - -e ./cpp_modules/big_factorial_cpp
+    - -e ./cpp_modules/matrix_operator

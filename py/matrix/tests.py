@@ -3,6 +3,8 @@ import itertools
 import numpy as np
 import numpy.typing as npt
 import matrix_operator_cpp
+from pylops import LinearOperator
+from pylops.utils import dottest as pylops_dottest
 
 m2d_3x3 = np.array([[1.,2.,0], [-1.,1.,1.], [3.,0.,1.]])
 m2d_3x5 = np.array([[1.,2.,0], [-1.,1.,1.], [3.,0.,1.], [0,1.,1.0],[-1,0,10]])
@@ -80,4 +82,21 @@ def test_operator_dotproduct(arr2d: npt.NDArray,  operator: str):
     xTmTy = np.dot(x,mTy)
     np.testing.assert_allclose(yTmx, xTmTy,rtol=1.0e-4)
 
-    
+class CPPMatrixMult(LinearOperator):
+    def __init__(self, m2d, operator_name):
+        self.m_op = create_operator(m2d, operator_name)
+        super().__init__(
+            dtype=m2d.dtype,
+            shape=m2d.shape,
+            explicit=True,
+        )
+
+    def _matvec(self, x):
+        return self.m_op.forward(x)
+
+    def _rmatvec(self, x):
+        return self.m_op.adjoint(x)
+
+def test_pylops_dotproduct(arr2d: npt.NDArray,  operator: str):
+    MOp = CPPMatrixMult(arr2d, operator)
+    pylops_dottest(MOp)

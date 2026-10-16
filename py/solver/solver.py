@@ -20,7 +20,7 @@ class Callback:
         if self.printk is not None and niterations % self.printk == 0:
             print(f"iteration {niterations} : {fk}")
     
-class GeneralSolver:
+class SciPySolver:
 
     def __init__(self, objfn, method='BFGS', niter=10):
         self.objfn = objfn
@@ -49,3 +49,15 @@ class GeneralSolver:
     @property
     def iterations(self):
         return self.callback.iterations
+
+def direct_solve(A, b, l=None, y=None):
+    M = np.dot(A.T, A)
+    rhs = np.dot(b, A)
+    if l is not None:
+        M = M + l*np.eye(M.shape[0])
+        if y is not None:
+            rhs = rhs + l*y
+    L = np.linalg.cholesky(M,upper=False)
+    Linv_rhs = np.dot(rhs, np.linalg.inv(L.T))
+    x = np.dot(Linv_rhs, np.linalg.inv(L))
+    return x

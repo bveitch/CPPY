@@ -49,8 +49,6 @@ python test_pylops_binding.py
 ```
  
 ## ToDo
- - Consolidate tests with pytest
- - Add a comparison of an L2 solver calling a wrapped cpp matrix operator. Compare this to a direct solve in Python using the underlying numpy array/matrix. These *should* agree!
  - Fix ```clang``` issues!
  - Deprecate setup.py. Note this means moving to ```scikit-build-core```
 
