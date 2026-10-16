@@ -1,10 +1,10 @@
 import os
 import platform
 
-# 1. Enforce Homebrew GCC on Mac
+# 1. Enforce Homebrew LLVM on Mac
 if platform.system() == "Darwin":
-    os.environ["CC"] = "/opt/homebrew/bin/gcc-15"
-    os.environ["CXX"] = "/opt/homebrew/bin/g++-15"
+    os.environ["CC"] = "/opt/homebrew/opt/llvm/bin/clang"
+    os.environ["CXX"] = "/opt/homebrew/opt/llvm/bin/clang++"
 
 # 2. Configure paths for Homebrew dependencies like GMP
 include_dirs = []
