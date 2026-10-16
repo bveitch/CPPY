@@ -35,13 +35,14 @@ python setup.py build
 python setup.py install
 ```
 Should install folders build, dist, including .lib.so and .egg respectively
-[!NOTE] Due to problems with ```clang``` on Apple Darwin and that these dont port with openmp, you will need to use gcc compiler (simplest) or install llvm to use clang. 
-- If using gcc,
+
+[NOTE!] Due to problems with ```clang``` on Apple Darwin and that these dont port with openmp, you will need to use gcc compiler (simplest) or install llvm to use clang. 
+- If using `gcc`
 ```bash
 brew install gmp
 brew install openmp
 ```
-- If using clang,
+- If using `clang`
 ```bash
 brew install gmp
 brew install openmp
