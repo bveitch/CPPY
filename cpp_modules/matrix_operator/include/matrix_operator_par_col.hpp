@@ -21,7 +21,7 @@ public:
     void fwd_add(const T* const input, T* const output) const final {
         for (int irow=0; irow<m_nrow; irow++){
             const T* row_data = m_data[irow];
-            #pragma omp parallel for default(none) shared (irow, row_data) reduction(+ : output[irow])
+            #pragma omp parallel for shared (irow, row_data) reduction(+ : output[irow])
             for (int icol=0; icol < m_ncol; ++icol) {
                 output[irow]+=row_data[icol]*input[icol];
             }
@@ -29,7 +29,7 @@ public:
     }
 
    void adj_add(const T* const inputT, T* const outputT) const final { 
-        #pragma omp parallel for default(none)
+        #pragma omp parallel for
         for (int icol=0; icol<m_ncol; icol++){
             const T* col_data = m_dataT[icol];
             for (int irow=0; irow < m_nrow; ++irow) {
