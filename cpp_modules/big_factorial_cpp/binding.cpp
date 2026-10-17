@@ -39,7 +39,10 @@ PYBIND11_MODULE(big_factorial_cpp, m) {
 
     )pbdoc";
 
-    m.def("factorial", &factorial, R"pbdoc(
+    m.def(
+    "factorial",
+    static_cast<py::str (*)(const py::str &)>(&factorial),
+    R"pbdoc(
         convert python str to mpz_class
         take factorial 
         convert back to python str
