@@ -52,10 +52,10 @@ brew install llvm
 Run the following script for the `matrix` package:
 ```bash
 cd py/matrix
-python test_pylops_binding.py
+pytest tests.py
 ```
  
 ## ToDo
- - Deprecate setup.py. Note this means moving to ```scikit-build-core```
+ - Deprecate setup.py. Note this means moving to ```scikit-build-core``` (see branch `cmakelists`)
 
 
