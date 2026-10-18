@@ -28,28 +28,24 @@ To install individual cpp modules,
 ```
 pip install -e ./cpp_modules/[choose_module]
 ```
-To install with ```setuptools``` [deprecated]
-```bash
-cd cpp_modules/matrix_operator
-python setup.py build
-python setup.py install
-```
-Should install folders build, dist, including .lib.so and .egg respectively
-[!NOTE] Due to problems with ```clang++``` the modules currently fail to build on a Mac. ***A work in progress!*** In any case you would need to first install gmp and openmp, say by,
+
+> [NOTE!] Due to problems with ```clang``` on Apple Darwin which dont port with openmp, you will need to use gcc compiler (simplest) or install llvm to use clang. 
+- If using `gcc`
 ```bash
 brew install gmp
 brew install openmp
 ```
- 
+- If using `clang`
+```bash
+brew install gmp
+brew install openmp
+brew install llvm
+```
 ## Running the tests
 Run the following script for the `matrix` package:
 ```bash
 cd py/matrix
 pytest tests.py
 ```
- 
-## ToDo
- - Consolidate tests with pytest
- - Add a comparison of an L2 solver calling a wrapped cpp matrix operator. Compare this to a direct solve in Python using the underlying numpy array/matrix. These *should* agree!
 
 
