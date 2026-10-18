@@ -1,8 +1,0 @@
-project(big_factorial_cpp LANGUAGES CXX)
-set(PYBIND11_FINDPYTHON ON)
-find_package(pybind11 CONFIG REQUIRED)
-pybind11_add_module(big_factorial_cpp binding.cpp)
-find_package(GMP REQUIRED)
-target_link_libraries(big_factorial_cpp PRIVATE GMP::GMP GMP::GMPXX)
-target_link_libraries(big_factorial_cpp PUBLIC pybind11::headers)
-install(TARGETS factorial_example DESTINATION .)

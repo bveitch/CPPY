@@ -7,15 +7,32 @@ import matrix_operator_cpp
 class L2ObjectiveFn:
 
     def __init__(self, 
-                 arr2d : npt.NDArray | None = None, 
-                 data: npt.NDArray | None = None,
-                 nthreads: int = 4):
-        self.op = None
-        if arr2d is not None:
-            self.op = matrix_operator_cpp.MatrixOp(arr2d, nthreads)
-            if data is not None:
-                assert data.size == self.op.shape[0], f"{data.size=} not equal to {self.op.shape[0]}"
+                 op, 
+                 data: npt.NDArray | None = None):
+        self.op = op
         self.d = data
+
+    @classmethod
+    def from_arr2d(cls, 
+                arr2d : npt.NDArray, 
+                data: npt.NDArray | None = None,
+                nthreads: int = 4):
+        op = matrix_operator_cpp.MatrixOp(arr2d, nthreads)
+        assert data.size == op.shape[0], f"{data.size=} not equal to {op.shape[0]}"
+        return cls(op, data)
+    
+    @classmethod
+    def from_sparse_values(cls, 
+                nrow : int,
+                ncol : int,
+                locs : npt.NDArray,
+                values : npt.NDArray, 
+                data: npt.NDArray | None = None,
+                nthreads: int = 4):
+        assert data.size == nrow, f"{data.size=} not equal to {nrow}"
+        op = matrix_operator_cpp.SparseOp(nrow, ncol, tuple(locs[0]), tuple(locs[1]), tuple(values), nthreads)
+        return cls(op, data)
+        
 
     @property
     def data(self):
