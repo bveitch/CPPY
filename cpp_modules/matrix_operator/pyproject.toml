@@ -14,6 +14,7 @@ build-backend = "scikit_build_core.build"
 
 [tool.scikit-build]
 wheel.packages = ["matrix_operator_cpp"]
+cmake.build-type = "Release"
 
 [tool.scikit-build.env]
 CC = "/opt/homebrew/bin/gcc-15"

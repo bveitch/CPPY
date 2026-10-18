@@ -13,7 +13,8 @@ requires = [
 build-backend = "scikit_build_core.build"
 
 [tool.scikit-build]
-wheel.packages = ["big_factorial_cpp"]
+wheel.packages = ["array_norm_cpp"]
+cmake.build-type = "Release"
 
 [tool.scikit-build.env]
 CC = "/opt/homebrew/bin/gcc-15"
