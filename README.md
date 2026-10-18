@@ -28,13 +28,6 @@ To install individual cpp modules,
 ```
 pip install -e ./cpp_modules/[choose_module]
 ```
-To install with ```setuptools``` [deprecated]
-```bash
-cd cpp_modules/matrix_operator
-python setup.py build
-python setup.py install
-```
-Should install folders build, dist, including .lib.so and .egg respectively
 
 > [NOTE!] Due to problems with ```clang``` on Apple Darwin which dont port with openmp, you will need to use gcc compiler (simplest) or install llvm to use clang. 
 - If using `gcc`
@@ -54,8 +47,6 @@ Run the following script for the `matrix` package:
 cd py/matrix
 pytest tests.py
 ```
- 
-## ToDo
- - Deprecate setup.py. Note this means moving to ```scikit-build-core``` (see branch `cmakelists`)
+
 
 

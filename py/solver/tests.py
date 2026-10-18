@@ -24,7 +24,7 @@ def test_solve_tykhonov():
     Aobjfn = L2ObjectiveFn.from_arr2d(arr2d= arr2d, data = data)
     ans = SciPySolver(Aobjfn).solve()
     exp = direct_solve(A,b, l=l, y=y)
-    np.testing.assert_allclose(ans, exp, rtol=1.0e-5)
+    np.testing.assert_allclose(ans, exp, rtol=5.0e-6)
 
 def test_solve_sparse_tykhonov():
     A = np.zeros((4, 10))
@@ -48,4 +48,4 @@ def test_solve_sparse_tykhonov():
         data = data)
     ans = SciPySolver(Aobjfn).solve()
     exp = direct_solve(A,b, l=l, y=y)
-    np.testing.assert_allclose(ans, exp, rtol=1.0e-5)
+    np.testing.assert_allclose(ans, exp, rtol=5.0e-6)
