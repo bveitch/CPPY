@@ -45,7 +45,7 @@ brew install openmp
 Run the following script for the `matrix` package:
 ```bash
 cd py/matrix
-python test_pylops_binding.py
+pytest tests.py
 ```
  
 ## ToDo
